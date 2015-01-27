@@ -8,6 +8,8 @@
 ####nodejs文件夹下为Nodejs
 #####微信数字签名只能由服务器端生成
 #####这里数字签名生成示例用于放在NodeJS服务器环境下，用于产生微信JS-SDK的数字签名服务
+
+#####nodejs/routes/index.js为签名生成服务逻辑
 <br />
 
 ####client-web文件夹下为浏览器端普通WEB页

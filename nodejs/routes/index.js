@@ -9,6 +9,7 @@ var http = require("http");
 var https = require("https");
 var jsSHA = require('jssha');
 var querystring = require('querystring');
+
 module.exports = function(app){
 	// 输出数字签名对象
 	var responseWithJson = function (res, data) {
@@ -131,11 +132,16 @@ module.exports = function(app){
 		});
 	};
 
+	// 默认服务器首页
 	app.get('/', function(req, res) {
 	  	res.render('index');
 	});
 
-	// 通过请求中带的index值来判断是公司运营的哪个公众平台
+	
+	/**
+	 * 主要请求路由
+	 * 通过请求中带的index值来判断是公司运营的哪个公众平台
+	 */
 	app.post('/rsx/:index', function(req, res) {
 		var index = req.params.index;
 		var _url = req.body.url;
