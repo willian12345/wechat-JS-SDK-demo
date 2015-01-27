@@ -1,7 +1,7 @@
 /**
  * route index.js
- * 
  * author: willian12345@126.com
+ * github: https://github.com/willian12345/wechat-JS-SDK-demo
  * time: 2015-1-27
  */
 
