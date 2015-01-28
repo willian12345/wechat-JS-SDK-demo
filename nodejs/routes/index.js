@@ -26,11 +26,11 @@ module.exports = function(app){
 	var createNonceStr = function() {
 		return Math.random().toString(36).substr(2, 15);
 	};
+
 	// 时间戳产生函数
 	var createTimeStamp = function () {
 		return parseInt(new Date().getTime() / 1000) + '';
 	};
-
 
 	var errorRender = function (res, info, data) {
 		if(data){
@@ -49,40 +49,30 @@ module.exports = function(app){
 	var expireTime = 7200 - 100;
 
 	/**
-	 * 公司运营的各个公众平台appid及secret
+		公司运营的各个公众平台appid及secret
 		对象结构如：
 		[{
 			appid: 'wxa0f06601f19433af'
 			,secret: '097fd14bac218d0fb016d02f525d0b1e'
 		}]
-	 */
-
-	// 为保密，appid与secret都进行了更改，测试时需要换成真实的appid和secret
+	*/
 	// 路径为'xxx/rsx/0'时表示榕树下
 	// 路径为'xxx/rsx/1'时表示榕树下其它产品的公众帐号
 	// 以此以0,1,2代表数组中的不同公众帐号
 	// 以rsx或其它路径文件夹代表不同公司产品
-	var appIds = [
-		{
-			appid: 'wx211e561186xxxxxx'
-			,secret: 'e2f63d171ac1b3170cf44920872ff9d5'
-		}
-		,{
-			appid: 'wxa0f06601f1xxxxxx'
-			,secret: '097fd14bac218d0fb016d02f525d0b1e'
-		}
-	];
+	var getAppsInfo = require('./../apps-info'); // 从外部加载app的配置信息
+	var appIds = getAppsInfo();
 	/**
-	 * 缓存在服务器的每个URL对应的数字签名对象
+		缓存在服务器的每个URL对应的数字签名对象
 		{
 			'http://game.4gshu.com/': {
-				appid: 'wxa0f06601f19433af'
-				,secret: '097fd14bac218d0fb016d02f525d0b1e'
+				appid: 'wxa0f06601f194xxxx'
+				,secret: '097fd14bac218d0fb016d02f525dxxxx'
 				,timestamp: '1421135250'
 				,noncestr: 'ihj9ezfxf26jq0k'
 			}
 		}
-	 */
+	*/
 	var cachedSignatures = {};
 
 	// 计算签名
@@ -132,16 +122,12 @@ module.exports = function(app){
 		});
 	};
 
-	// 默认服务器首页
+	// 服务根目录默认输出页
 	app.get('/', function(req, res) {
 	  	res.render('index');
 	});
 
-	
-	/**
-	 * 主要请求路由
-	 * 通过请求中带的index值来判断是公司运营的哪个公众平台
-	 */
+	// 通过请求中带的index值来判断是公司运营的哪个公众平台
 	app.post('/rsx/:index', function(req, res) {
 		var index = req.params.index;
 		var _url = req.body.url;
@@ -167,6 +153,7 @@ module.exports = function(app){
 					,url: signatureObj.url
 				});
 			}
+			// 此处可能需要清理缓存当中已过期的数据
 		}
 
 		
