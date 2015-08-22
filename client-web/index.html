@@ -1,80 +1,151 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-	<meta charset="UTF-8">
-	<meta name ="viewport" content ="initial-scale=1, maximum-scale=1, minimum-scale=1" />
-	<title>新微信JS-SDK测试微信分享及相关API</title>
+	<meta charset="utf-8">
+	<meta name ="viewport" content ="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1" />
+	<title>测颜值，看能不能靠脸吃饭</title>
+	<script>
+		var fsize = 100 * (window.innerWidth / 375) + 'px';
+		document.getElementsByTagName('html')[0].style.fontSize = fsize;
+	</script>
+	<link rel="stylesheet" href="css/index.css?t=201508211924">
 </head>
-<body>
-	<button id="addPic">添加图片</button>
-	<ul id="picList"></ul>
-
-	<script src="js/jquery.min.js"></script>
+<body ontouchmove="event.preventDefault();">
+	<div class="loader" id="loader">
+		<img src="img/1.gif" alt="" />
+		<div class="enter-btn" id="enterBtn"></div>
+	</div>
+	<div class="wrap" id="wrap">
+		<div class="page p2" id="p2">
+			<img src="img/2.gif" alt="">
+			<div class="hot-area skip2p3-btn" id="skip2p3Btn"></div>
+		</div>
+		<div class="page p3" id="p3">
+			<img src="img/3-bg.gif" alt="" class="p3-bg">
+			<div class="photo-frame" id="photoFrame"></div>
+			<div class="result" id="result">
+				<!-- <img src="img/r/0.png" alt=""> -->
+			</div>
+			<div class="hot-area share-btn"></div>
+			<a href="http://a.app.qq.com/o/simple.jsp?pkgname=im.kuaipai" class="hot-area download-btn"></a>
+			<a href="#" class="hot-area more-btn"></a>
+			<img src="img/stars.gif" alt="" class="stars">
+		</div>
+	</div>
+	<script src="http://beauty-assets.oss-cn-hangzhou.aliyuncs.com/tms/global/js/jquery.min2.0.3.js"></script>
+	<script src="http://beauty-assets.oss-cn-hangzhou.aliyuncs.com/tms/global/js/fastclick.min.js"></script>
 	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 	<script>
-		$.ajax({
-			url: 'http://wechat.4gshu.com/rsx/0/'// 此处url请求地址需要替换成你自己实际项目中服务器数字签名服务地址
-			,type: 'post'
-			,data: {
-				url: location.href.split('#')[0] // 将当前URL地址上传至服务器用于产生数字签名
-			}
-		}).done(function(r){
-			// 返回了数字签名对象
-			console.log(r);
-			console.log(r.appid);
-			console.log(r.timestamp);
-			console.log(r.nonceStr);
-			console.log(r.signature);
+	$(function(){
+	    // 调整页面根字号
+	    var $html = $('html');
+	    $(window).resize(function(){
+	        var clientWidth = $(window).width();
+	        var fsize = 100 * (clientWidth / 375) + 'px';
+	        $html.css('font-size', fsize);
+	    }).trigger('resize');
 
-			// 开始配置微信JS-SDK
-			wx.config({
-		        debug: true,
-		        appId: r.appid,
-		        timestamp: r.timestamp,
-		        nonceStr: r.nonceStr,
-		        signature: r.signature,
-		        jsApiList: [
-		            'checkJsApi',
-		            'onMenuShareTimeline',
-		            'onMenuShareAppMessage',
-		            'onMenuShareQQ',
-		            'onMenuShareWeibo',
-		            'hideMenuItems',
-		            'chooseImage'
-		        ]
-		    });
-		    
-		    // 调用微信API
+	    var init;
+	    var rArr = [0, 2, 3, 5, 6, 10, 11, 13, 18, 20, 33, 47, 52, 58, 88, 94, 100];
+	    var rArrLen = rArr.length - 1;
+	    var rand = Math.round(Math.random() * rArrLen);
+	    var rImgNum = rArr[rand];
+	    
+	    var txt = '我的表情值'+ rImgNum +'元，打败了全球'+ ((rImgNum * .9).toFixed(1)) +'%的人！以后可以靠脸吃饭了'
+	    var sdata = {
+		    title: txt,
+		    desc: txt,
+		    link: location.href.split('#')[0],
+		    imgUrl: 'http://game.4gshu.com/xuangedan/other-project/2015-01-06/img/share-wx-logo.jpg',
+		};
+		var def = $.Deferred();
+	    var loader = function () {
+	        var imgArr = [
+	        	'img/2.gif'
+	        	,'img/3-bg.gif'
+	        	,'img/enter-btn.png'
+	        ];
+
+	        $.each(rArr, function(i, v){
+	        	imgArr.push('img/r/'+v+'.png');
+	        });
+
+	        var l = l=imgArr.length, loadedIndex = 0;
+	        var $loader = $('#loader');
+	        for(var i=0; i<l; i++){
+	            var img = new Image()
+	            img.onload = function () {
+	                loadedIndex++;
+	                var per = ((loadedIndex / l)*100).toFixed(2) + '%';
+	                if(loadedIndex >= l){
+	                    console.log('compelete!');
+	                    def.resolve();
+	                }
+	            }
+	            img.src = imgArr[i];
+	        }
+	    };
+	    loader();
+
+	    // wechat sdk 签名
+	    var wxReq = $.ajax({
+            url: 'http://api.h5.biuapp.im/w/i_system_query/wechat_signs'
+            ,type: 'post'
+            ,dataType: 'json'
+            ,data: {
+                url: location.href.split('#')[0]
+            }
+        }).done(function(resp){
+        	var r = resp.result;
+            wx.config({
+                appId: r.wechat_appid,
+                // debug: true,
+                timestamp: r.timestamp,
+                nonceStr: r.nonceStr,
+                signature: r.signature,
+                jsApiList: [
+                    'checkJsApi',
+                    'onMenuShareTimeline',
+                    'onMenuShareAppMessage',
+                    'onMenuShareQQ',
+                    'onMenuShareWeibo',
+                    'chooseImage'
+                ]
+            });
+            // 调用微信API
 		    wx.ready(function(){
-		    	var sdata = {
-				    title: '那年|测试微信分享及相关API',
-				    desc: '那年|测试微信分享及相关API',
-				    link: 'http://game.4gshu.com/deep-love/index2.html',
-				    imgUrl: 'http://game.4gshu.com/xuangedan/other-project/2015-01-06/img/share-wx-logo.jpg',
-				    success: function () { 
-				        alert('用户确认分享后执行的回调函数');
-				    },
-				    cancel: function () { 
-				        alert('用户取消分享后执行的回调函数');
-				    }
-				};
 		    	wx.onMenuShareTimeline(sdata);
 				wx.onMenuShareAppMessage(sdata);
 				// 添加图片
-				$('#addPic').on('click', function(){
+				$('#skip2p3Btn').on('click', function(){
 					wx.chooseImage({
 					    success: function (res) {
-					        var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
-					        // var imgs = localIds.split(',');
-					        localIds.forEach(function(v, i){
-					        	alert(v);
-					        	$('#picList').append('<li><img src="'+ v +'" alt="" width="50"></li>');
-					        });
+					        var localIds = res.localIds;
+					        $('#photoFrame').html('<img src="'+ localIds[0] +'"/>');
+					        $('#p2').fadeOut(800);
+		    				$('#p3').fadeIn(900);
+					        $('#result').html('<img src="img/r/'+ rImgNum +'.png" />');
 					    }
 					});
 				});
 		    });
+        });
+
+		// 当资源与微信sdk准备好时可以开始游戏
+		$.when(def, wxReq).done(function(){
+			$('#enterBtn').show().click(function(){
+				$('#loader').fadeOut(800);
+	    		$('#wrap').fadeIn(900);
+			});
+	    	$('#skip2p3Btn').click(function(){
+	    		// $('#p2').fadeOut(800);
+		    	// $('#p3').fadeIn(900);
+	    		// $('#result').html('<img src="img/r/'+ rImgNum +'.png" />');
+	    	});
 		});
+
+		FastClick.attach(document.body);
+	});
 	</script>
 </body>
 </html>

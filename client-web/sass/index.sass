@@ -1,0 +1,159 @@
+@charset "utf-8"
+$use-bounceInUp: true
+@import "lib/_normalize.scss", "lib/animate/_animate.scss", "lib/_sasshat.sass"
+
+@mixin clearfix()
+	&:before,&:after
+		content: " "
+		display: table
+	&:after
+		clear: both
+*,
+*:before,
+*:after
+	+box-sizing(border-box)
+@function cs($val)
+	@return (($val) / 100) * 1rem
+
+.fadeout
+	+animation(fadeOut .5s .5s)
+	+animation-fill-mode(both)
+.fadeinup
+	+animation(fadeInUp .5s .5s)
+	+animation-fill-mode(both)
++keyframes(enterBtn)
+	100%
+		background-position: 0 200%
+
+html, body
+	position: relative
+	height: 100%
+
+body
+	font-size: 12px
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, 'Microsoft Yahei', '微软雅黑', '宋体'
+	font-weight: bolder
+	color: #888
+	background: #fff
+	overflow: hidden
+img
+	width: 100%
+
+.wrap
+	height: 100%
+	text-align: center
+	background-color: rgba(#000, .3)
+	overflow: hidden
+
+.loader
+	position: absolute
+	left: 0
+	top: 0
+	right: 0
+	width: 100%
+	height: 100%
+	z-index: 50
+	background-color: #2B5591
+.enter-btn
+	display: none
+	position: absolute
+	left: 50%
+	top: cs(430)
+	z-index: 51
+	margin-left: cs(-94)
+	width: cs(224)
+	height: cs(120)
+	background-image: url(../img/enter-btn.png)
+	background-size: 100%
+	+animation(enterBtn 600ms steps(2) infinite, bounceInUp .6s ease-out)
+
+.page
+	position: relative
+	height: 100%
+.p2
+	position: absolute
+	left: 0
+	top: 0
+	right: 0
+	z-index: 3
+	width: 100%
+	background-color: #88A851
+.hot-area
+	position: absolute
+	z-index: 5
+	display: block
+.skip2p3-btn
+	right: 0
+	top: cs(480)
+	width: cs(230)
+	height: cs(115)
+
+.p3
+	position: absolute
+	left: 0
+	top: 0
+	right: 0
+	z-index: 2
+	background-color: #F9CA33
+.photo-frame
+	position: absolute
+	top: cs(10)
+	left: 50%
+	margin-left: cs(-128)
+	width: cs(257)
+	height: cs(257)
+	background-color: #fff
+	overflow: hidden
+	+border-radius(6px)
+.stars
+	position: absolute
+	left: 50%
+	top: 0
+	margin-left: cs(-169)
+	width: cs(338)
+.result
+	position: absolute
+	top: cs(260)
+	left: 50%
+	margin-left: cs(-187.5)
+	width: cs(375)
+	height: cs(202.5)
+	
+.share-btn
+	left: 0
+	top: cs(460)
+	width: cs(162)
+	height: cs(70)
+.download-btn
+	right: 0
+	top: cs(460)
+	width: cs(162)
+	height: cs(70)
+.more-btn
+	top: cs(534)
+	left: 50%
+	margin-left: cs(-90)
+	width: cs(200)
+	height: cs(64)
+@media screen and (max-height: 568px)
+	.page
+		padding: 0 5px
+@media screen and (max-height: 480px)
+	.enter-btn
+		top: cs(320)
+	.page,.loader
+		padding: 0 30px
+	.skip2p3-btn
+		top: cs(370)
+		height: cs(110)
+	.photo-frame
+		margin-left: cs(-205/2)	
+		width: cs(205)
+		height: cs(205)
+	.result
+		top: cs(210)
+		margin-left: cs(-150)
+		width: cs(300)
+	.stars
+		margin-left: cs(-150)
+		width: cs(300)

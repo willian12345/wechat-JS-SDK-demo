@@ -1,0 +1,426 @@
+@charset "UTF-8";
+/*! normalize.css v2.1.3 | MIT License | git.io/normalize */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+summary {
+  display: block; }
+
+audio:not([controls]) {
+  display: none;
+  height: 0; }
+
+html {
+  font-family: sans-serif; }
+
+a {
+  background: transparent; }
+
+a:focus {
+  outline: thin dotted; }
+
+a:active,
+a:hover {
+  outline: 0; }
+
+hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0; }
+
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, serif;
+  font-size: 1em; }
+
+pre {
+  white-space: pre-wrap; }
+
+small {
+  font-size: 80%; }
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline; }
+
+sup {
+  top: -0.5em; }
+
+sub {
+  bottom: -0.25em; }
+
+img {
+  border: 0;
+  vertical: middle; }
+
+figure {
+  margin: 0; }
+
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em; }
+
+legend {
+  border: 0;
+  padding: 0; }
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+  margin: 0; }
+
+button,
+input {
+  line-height: normal; }
+
+button,
+select {
+  text-transform: none; }
+
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  cursor: pointer; }
+
+button[disabled],
+html input[disabled] {
+  cursor: default; }
+
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box;
+  padding: 0; }
+
+input[type="search"] {
+  -webkit-appearance: textfield;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box; }
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none; }
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0; }
+
+textarea {
+  overflow: auto;
+  vertical-align: top; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+ul {
+  list-style: none; }
+
+h1, h2, h3, h4, ul, body, dl, dd, p {
+  margin: 0;
+  padding: 0; }
+
+i {
+  font-style: normal; }
+
+a, img {
+  -webkit-touch-callout: none; }
+
+a {
+  text-decoration: none;
+  outline: 0; }
+
+img {
+  vertical-align: middle; }
+
+html, body {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent; }
+
+@-webkit-keyframes bounceInUp {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(2000px); }
+  60% {
+    opacity: 1;
+    -webkit-transform: translateY(-30px); }
+  80% {
+    -webkit-transform: translateY(10px); }
+  100% {
+    -webkit-transform: translateY(0); } }
+@-moz-keyframes bounceInUp {
+  0% {
+    opacity: 0;
+    -moz-transform: translateY(2000px); }
+  60% {
+    opacity: 1;
+    -moz-transform: translateY(-30px); }
+  80% {
+    -moz-transform: translateY(10px); }
+  100% {
+    -moz-transform: translateY(0); } }
+@-o-keyframes bounceInUp {
+  0% {
+    opacity: 0;
+    -o-transform: translateY(2000px); }
+  60% {
+    opacity: 1;
+    -o-transform: translateY(-30px); }
+  80% {
+    -o-transform: translateY(10px); }
+  100% {
+    -o-transform: translateY(0); } }
+@keyframes bounceInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(2000px); }
+  60% {
+    opacity: 1;
+    transform: translateY(-30px); }
+  80% {
+    transform: translateY(10px); }
+  100% {
+    transform: translateY(0); } }
+.bounceInUp {
+  -webkit-animation-name: bounceInUp;
+  -moz-animation-name: bounceInUp;
+  animation-name: bounceInUp; }
+
+body {
+  -webkit-backface-visibility: hidden; }
+
+.animated {
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  animation-fill-mode: both; }
+  .animated.hinge {
+    -webkit-animation-duration: 2s;
+    -moz-animation-duration: 2s;
+    animation-duration: 2s; }
+
+/* Sasshat Sass Library
+ * Author: wang.2gou
+ * Email: willian12345@126.com
+ * Date: 2014-06-06
+ * Vertion: Beta
+ * Github: https://github.com/willian12345/sasshat
+ * Sass-version: Sass@3.7.7
+ */
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box; }
+
+.fadeout {
+  -webkit-animation: fadeOut 0.5s 0.5s;
+  -moz-animation: fadeOut 0.5s 0.5s;
+  -ms-animation: fadeOut 0.5s 0.5s;
+  animation: fadeOut 0.5s 0.5s;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  -ms-animation-fill-mode: both;
+  animation-fill-mode: both; }
+
+.fadeinup {
+  -webkit-animation: fadeInUp 0.5s 0.5s;
+  -moz-animation: fadeInUp 0.5s 0.5s;
+  -ms-animation: fadeInUp 0.5s 0.5s;
+  animation: fadeInUp 0.5s 0.5s;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  -ms-animation-fill-mode: both;
+  animation-fill-mode: both; }
+
+@-webkit-keyframes enterBtn {
+  100% {
+    background-position: 0 200%; } }
+@-moz-keyframes enterBtn {
+  100% {
+    background-position: 0 200%; } }
+@-ms-keyframes enterBtn {
+  100% {
+    background-position: 0 200%; } }
+@keyframes enterBtn {
+  100% {
+    background-position: 0 200%; } }
+html, body {
+  position: relative;
+  height: 100%; }
+
+body {
+  font-size: 12px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, "Microsoft Yahei", "微软雅黑", "宋体";
+  font-weight: bolder;
+  color: #888;
+  background: #fff;
+  overflow: hidden; }
+
+img {
+  width: 100%; }
+
+.wrap {
+  height: 100%;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.3);
+  overflow: hidden; }
+
+.loader {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 50;
+  background-color: #2B5591; }
+
+.enter-btn {
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 4.3rem;
+  z-index: 51;
+  margin-left: -0.94rem;
+  width: 2.24rem;
+  height: 1.2rem;
+  background-image: url(../img/enter-btn.png);
+  background-size: 100%;
+  -webkit-animation: enterBtn 600ms steps(2) infinite, bounceInUp 0.6s ease-out;
+  -moz-animation: enterBtn 600ms steps(2) infinite, bounceInUp 0.6s ease-out;
+  -ms-animation: enterBtn 600ms steps(2) infinite, bounceInUp 0.6s ease-out;
+  animation: enterBtn 600ms steps(2) infinite, bounceInUp 0.6s ease-out; }
+
+.page {
+  position: relative;
+  height: 100%; }
+
+.p2 {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  z-index: 3;
+  width: 100%;
+  background-color: #88A851; }
+
+.hot-area {
+  position: absolute;
+  z-index: 5;
+  display: block; }
+
+.skip2p3-btn {
+  right: 0;
+  top: 4.8rem;
+  width: 2.3rem;
+  height: 1.15rem; }
+
+.p3 {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  background-color: #F9CA33; }
+
+.photo-frame {
+  position: absolute;
+  top: 0.1rem;
+  left: 50%;
+  margin-left: -1.28rem;
+  width: 2.57rem;
+  height: 2.57rem;
+  background-color: #fff;
+  overflow: hidden;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  border-radius: 6px; }
+
+.stars {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  margin-left: -1.69rem;
+  width: 3.38rem; }
+
+.result {
+  position: absolute;
+  top: 2.6rem;
+  left: 50%;
+  margin-left: -1.875rem;
+  width: 3.75rem;
+  height: 2.025rem; }
+
+.share-btn {
+  left: 0;
+  top: 4.6rem;
+  width: 1.62rem;
+  height: 0.7rem; }
+
+.download-btn {
+  right: 0;
+  top: 4.6rem;
+  width: 1.62rem;
+  height: 0.7rem; }
+
+.more-btn {
+  top: 5.34rem;
+  left: 50%;
+  margin-left: -0.9rem;
+  width: 2rem;
+  height: 0.64rem; }
+
+@media screen and (max-height: 568px) {
+  .page {
+    padding: 0 5px; } }
+@media screen and (max-height: 480px) {
+  .enter-btn {
+    top: 3.2rem; }
+
+  .page, .loader {
+    padding: 0 30px; }
+
+  .skip2p3-btn {
+    top: 3.7rem;
+    height: 1.1rem; }
+
+  .photo-frame {
+    margin-left: -1.025rem;
+    width: 2.05rem;
+    height: 2.05rem; }
+
+  .result {
+    top: 2.1rem;
+    margin-left: -1.5rem;
+    width: 3rem; }
+
+  .stars {
+    margin-left: -1.5rem;
+    width: 3rem; } }

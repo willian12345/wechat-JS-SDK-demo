@@ -1,0 +1,297 @@
+@charset "utf-8"
+/*
+ * Sasshat Sass Library
+ * Author: wang.2gou
+ * Email: willian12345@126.com
+ * Date: 2014-06-06
+ * Vertion: Beta
+ * Github: https://github.com/willian12345/sasshat
+ * Sass-version: Sass@3.7.7
+ */
+@function pxToEm($px, $base: 16)
+	@return ($px / $base) * 1em
+@function strip-units($number)
+	@return $number / ($number * 0 + 1)
+
+@mixin prefixer($property, $value, $valPrefix: false)
+	-webkit-#{$property}: if($valPrefix, -webkit-#{$value}, $value)
+	-moz-#{$property}: if($valPrefix, -moz-#{$value}, $value)
+	-ms-#{$property}: if($valPrefix, -ms-#{$value}, $value)
+	#{$property}: $value
+
+//A
+@mixin align-content($value)
+	//flex-start | flex-end | center | space-between | space-around | stretch
+	+prefixer($value)
+@mixin align-items($value)
+	//flex-start | flex-end | center | baseline | stretch
+	+prefixer($value)
+@mixin justify-content($value)
+	//flex-start | flex-end | center | space-between | space-around
+	+prefixer($value)
+///align-self
+@mixin animation($value...)
+	// animation-name | animation-duration | animation-timing-function | animation-delay | animation-iteration-count | animation-direction | animation-fill-mode
+	+prefixer(animation, $value)
+@mixin animation-delay($value)
+	+prefixer(animation-delay, $value)
+@mixin animation-direction($value)
+	// normal | alternate
+	+prefixer(animation-direction, $value)
+@mixin animation-duration($value)
+	+prefixer(animation-duration, $value)
+@mixin animation-fill-mode($value)
+	//none | forwards | backwards | both
+	+prefixer(animation-fill-mode, $value)
+@mixin animation-iteration-count($value)
+	+prefixer(animation-iteration-count, $value)
+@mixin animation-name($value...)
+	+prefixer(animation-name, $value)
+@mixin animation-play-state($value)
+	//paused | running;
+	+prefixer(animation-play-state, $value)
+@mixin animation-timing-function($value)
+	//linear | ease | ease-in | ease-out | ease-in-out | cubic-bezier(n,n,n,n);
+	+prefixer(animation-play-state, $value)
+@mixin appearance($value)
+	+prefixer(appearance, $value)
+
+// B
+@mixin box-shadow($shadow...)
+	+prefixer(box-shadow, $shadow)
+// generate gradient code by software is better like: 
+// mozilla's http://www.colorzilla.com/gradient-editor
+/// @mixin background-image
+@mixin background-size($size...)
+	+prefixer(background-size, $size)
+@mixin background-origin($origin...)
+	// padding-box | border-box | content-box
+	+prefixer(background-origin, $origin)
+@mixin background-clip($clip...)
+	// padding-box | border-box | content-box
+	+prefixer(background-clip, $clip)
+@mixin backface-visibility($value)
+	// visible | hidden
+	+prefixer(backface-visibility, $value)
+@mixin blur($lengh)
+	+prefixer(filter, blur($lengh))
+@mixin border-radius($value)
+	// For the android low version maybe android < 2.3.3
+	@if $value == 100%
+		$value: 999em
+	+prefixer(border-radius, $value)
+@mixin border-bottom-left-radius($value)
+	@if $value == 100%
+		$value: 999em
+	+prefixer(border-bottom-left-radius, $value)
+@mixin border-bottom-right-radius($value)
+	@if $value == 100%
+		$value: 999em
+	+prefixer(border-bottom-right-radius, $value)
+@mixin border-top-left-radius($value)
+	@if $value == 100%
+		$value: 999em
+	+prefixer(border-top-left-radius, $value)
+@mixin border-top-right-radius($value)
+	@if $value == 100%
+		$value: 999em
+	+prefixer(border-top-right-radius, $value)
+// @mixin border-image
+@mixin box-sizing($value)
+	// padding-box | border-box
+	+prefixer(box-sizing, $value)
+@mixin brightness($lengh)
+	// amount
+	+prefixer(filter, brightness($lengh))
+//C
+@mixin calc($prop, $value)
+	// Value must be have space between each operations
+	#{$prop}: -webkit-calc(#{$value})
+	#{$prop}: -moz-calc(#{$value})
+	#{$prop}: calc(#{$value})
+@mixin column-count($value)
+	+prefixer(column-count, $value)
+@mixin column-gap($value)
+	+prefixer(column-gap, $value)
+@mixin column-rule($value...)
+	//column-rule-width column-rule-style column-rule-color
+	+prefixer(column-rule, $value)
+@mixin column-width($value)
+	+prefixer(column-width, $value)
+@mixin column-rule-style($value)
+	+prefixer(column-rule-style, $value)
+@mixin column-rule-color($value)
+	+prefixer(column-rule-color, $value)
+@mixin columns($value...)
+	// <column-width> | <column-count>
+	+prefixer(columns, $value)
+@mixin contrast($value...)
+	+prefixer(filter, contrast(#{$value}))
+
+
+//D
+@mixin display($value)
+	display: -webkit-box
+	display: -moz-box
+	display: -webkit-#{$value}
+	display: -ms-#{$value}
+	display: $value
+@mixin drop-shadow($value...)
+	+prefixer(filter, drop-shadow(#{$value}))
+//F
+@mixin filter($value...)
+	+prefixer(filter, $value)
+	
+@mixin flex($value)
+	+prefixer(flex,$value)
+@mixin flex-wrap($value)
+	// nowrap | wrap | wrap-reverse
+	+prefixer(flex-wrap, $value)
+@mixin font-face($fontFamily, $fontName, $path:'')
+	$_path:''
+	@if $path
+		$_path: $path + '/'
+	@font-face
+		font-family: $fontFamily
+		src: url($_path + $fontName +'.eot')
+		src: url($_path + $fontName +'.eot?#iefix') format('embedded-opentype'),url($_path + $fontName +'.woff') format('woff'),url($_path + $fontName +'.ttf') format('truetype'),url($_path + fontName +'.svg#'+ $fontName) format('svg')
+
+//G
+@mixin grayscale($value...)
+	// percentage
+	+prefixer(filter, grayscale(#{$value}))
+//H
+@mixin hue-rotate($value...)
+	// x deg
+	+prefixer(filter, hue-rotate(#{$value}))
+@mixin invert($value...)
+	// percentage
+	+prefixer(filter, invert(#{$value}))
+//J
+@mixin justify-content($value)
+	+prefixer(justify-content, $value)
+
+
+//K
+@mixin keyframes($animationName)
+	@-webkit-keyframes #{$animationName}
+		@content
+	@-moz-keyframes #{$animationName}
+		@content
+	@-ms-keyframes #{$animationName}
+		@content
+	@keyframes #{$animationName}
+		@content
+//O
+@mixin opacity($value)
+	+prefixer(opacity, $value)
+@mixin order($value)
+	-webkit-box-ordinal-group: $value
+	-moz-box-ordinal-group: $value   
+	-ms-flex-order: $value
+	-webkit-order: $value 
+	order: $value
+//P
+@mixin perspective($value)
+	+prefixer(perspective, $value)
+@mixin perspective-origin($value...)
+	+prefixer(perspective-origin, $value)
+@mixin placeholder()
+	input::-webkit-input-placeholder
+		@content
+	input::-moz-input-placeholder
+		@content
+	input::-ms-input-placeholder
+		@content
+	input::input-placeholder
+		@content
+
+
+@mixin scale($value...)
+	+prefixer(transform, scale(#{$value}))
+@mixin scaleY($value)
+	+prefixer(transform, scaleY(#{$value}))
+@mixin scaleX($value)
+	+prefixer(transform, scaleX(#{$value}))
+@mixin scale3d($value...)
+	+prefixer(transform, scale3d(#{$value}))
+
+@mixin rotate($value...)
+	+prefixer(transform, rotate(#{$value}))
+@mixin rotateY($value)
+	+prefixer(transform, rotateY(#{$value}))
+@mixin rotateX($value)
+	+prefixer(transform, rotateX(#{$value}))
+@mixin rotate3d($value)
+	+prefixer(transform, rotate3d(#{$value}))
+
+@mixin skew($value...)
+	+prefixer(transform, skew(#{$value}))
+@mixin skewY($value)
+	+prefixer(transform, skewY(#{$value}))
+@mixin skewX($value)
+	+prefixer(transform, skewX(#{$value}))
+
+@mixin translate($value...)
+	+prefixer(transform, translate(#{$value}))
+@mixin translateY($value)
+	+prefixer(transform, translateY(#{$value}))
+@mixin translateX($value)
+	+prefixer(transform, translateX(#{$value}))
+@mixin translateZ($value)
+	+prefixer(transform, translateZ(#{$value}))
+@mixin translate3d($value...)
+	+prefixer(transform, translate3d(#{$value}))
+
+@mixin transform($value...)
+	+prefixer(transform, $value)
+@mixin transform-origin($value...)
+	+prefixer(transform-origin, $value)
+@mixin transform-style($value...)
+	//flat | preserve-3d
+	+prefixer(transform-origin, $value)
+/// value prefixed
+@mixin transition($value...)
+	+prefixer(transition, $value)
+@mixin transition-delay($value...)
+	+prefixer(transition-delay, $value)
+@mixin transition-duration($value...)
+	+prefixer(transition-duration, $value)
+/// value prefixed
+@mixin transition-property($value...)
+	+prefixer(transition-property, $value, true)
+@mixin transition-timing-function($value...)
+	+prefixer(transition-timing-function, $value)
+@mixin user-select($value...)
+	-webkit-touch-callout: $value
+	+prefixer(user-select, $value)
+@mixin text-shadow($value...)
+	+prefixer(text-shadow, $value)
+
+// For animate elements step by step
+@mixin dominoAnimation($loopElement, $frameName,  $start:1, $end:5, $duration:.5s, $delay:0, $delayInterval:.1, $timmingFuc:ease, $applyElement: false)
+	$startIndex: $start
+	$delay:strip-units($delay)
+	$delayInterval:strip-units($delayInterval)
+	$j:0
+	@for $i from $startIndex through $end
+		$j: $j+1
+		#{$loopElement}:nth-child(#{$i})
+			@if $applyElement
+				#{$applyElement}
+					@if $start < $end
+						+animation($frameName $duration ($j * $delayInterval + $delay)+s $timmingFuc)
+					@else
+						+animation($frameName $duration (($start - $i) * $delayInterval + $delay)+s $timmingFuc)
+					
+			@if not($applyElement)
+				@if $start < $end
+					+animation($frameName $duration ($j * $delayInterval + $delay)+s $timmingFuc)
+				@else
+					+animation($frameName $duration (($start - $i) * $delayInterval + $delay)+s $timmingFuc)
+	@if $applyElement
+		#{$applyElement}
+			+animation-fill-mode(both!important)
+	@if not($applyElement)
+		#{$loopElement}
+			+animation-fill-mode(both!important)
