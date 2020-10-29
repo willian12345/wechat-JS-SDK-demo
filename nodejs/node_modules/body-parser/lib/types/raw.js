@@ -1,14 +1,17 @@
 /*!
  * body-parser
- * Copyright(c) 2014 Douglas Christopher Wilson
+ * Copyright(c) 2014-2015 Douglas Christopher Wilson
  * MIT Licensed
  */
+
+'use strict'
 
 /**
  * Module dependencies.
  */
 
 var bytes = require('bytes')
+var debug = require('debug')('body-parser:raw')
 var read = require('../read')
 var typeis = require('type-is')
 
@@ -26,36 +29,73 @@ module.exports = raw
  * @api public
  */
 
-function raw(options) {
-  options = options || {};
+function raw (options) {
+  var opts = options || {}
 
-  var inflate = options.inflate !== false
-  var limit = typeof options.limit !== 'number'
-    ? bytes(options.limit || '100kb')
-    : options.limit
-  var type = options.type || 'application/octet-stream'
-  var verify = options.verify || false
+  var inflate = opts.inflate !== false
+  var limit = typeof opts.limit !== 'number'
+    ? bytes.parse(opts.limit || '100kb')
+    : opts.limit
+  var type = opts.type || 'application/octet-stream'
+  var verify = opts.verify || false
 
   if (verify !== false && typeof verify !== 'function') {
     throw new TypeError('option verify must be function')
   }
 
-  function parse(buf) {
+  // create the appropriate type checking function
+  var shouldParse = typeof type !== 'function'
+    ? typeChecker(type)
+    : type
+
+  function parse (buf) {
     return buf
   }
 
-  return function rawParser(req, res, next) {
-    if (req._body) return next()
+  return function rawParser (req, res, next) {
+    if (req._body) {
+      debug('body already parsed')
+      next()
+      return
+    }
+
     req.body = req.body || {}
 
-    if (!typeis(req, type)) return next()
+    // skip requests without bodies
+    if (!typeis.hasBody(req)) {
+      debug('skip empty body')
+      next()
+      return
+    }
+
+    debug('content-type %j', req.headers['content-type'])
+
+    // determine if request should be parsed
+    if (!shouldParse(req)) {
+      debug('skip parsing')
+      next()
+      return
+    }
 
     // read
-    read(req, res, next, parse, {
+    read(req, res, next, parse, debug, {
       encoding: null,
       inflate: inflate,
       limit: limit,
       verify: verify
     })
+  }
+}
+
+/**
+ * Get the simple type checker.
+ *
+ * @param {string} type
+ * @return {function}
+ */
+
+function typeChecker (type) {
+  return function checkType (req) {
+    return Boolean(typeis(req, type))
   }
 }

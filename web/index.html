@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<meta name ="viewport" content ="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1" />
+	<title>测试 demo</title>
+	<link rel="stylesheet" href="css/index.css?t=201508211924">
+</head>
+<body>
+	<h1>测试 wechat share sdk demo</h1>
+	<script src="js/jquery.min.js"></script>
+	<script src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+	<script>
+	$(function(){
+		var txt = '微信分享信息定制 demo helloworld'
+		var sdata = {
+		  title: txt,
+		  desc: txt,
+		  link: location.href.split('#')[0],
+		  imgUrl: 'https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png',
+		};
+		// wechat sdk 签名
+		$.ajax({
+	    url: 'https://tiepili.com/wechat/wechat/0',
+	    type: 'post',
+	    dataType: 'json',
+	    data: {
+	      url: location.href.split('#')[0]
+	    }
+		}).done(function(r){
+			console.log(r)
+	    wx.config({
+        appId: 'wxee244966607c1cf4',
+        debug: true,
+        timestamp: r.timestamp,
+        nonceStr: r.nonceStr,
+        signature: r.signature,
+        jsApiList: [
+            'checkJsApi',
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
+            'onMenuShareQQ',
+            'onMenuShareWeibo',
+            'chooseImage'
+        ]
+	    });
+	      // 调用微信API
+	  	wx.ready(function(){
+	  		wx.onMenuShareTimeline(sdata);
+				wx.onMenuShareAppMessage(sdata);
+	  	});
+		});
+	});
+	</script>
+</body>
+</html>
