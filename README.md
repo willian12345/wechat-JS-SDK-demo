@@ -1,7 +1,8 @@
 # wechat-JS-SDK-demo
-
 成功演示地址，使用 *微信* 或 *微信开发者工具* 访问
+
 https://tiepili.com/web/index.html
+
 分享时会显示 ok 的信息，分享的图引用的是百度的logo
 
 ##### 此项目用于测试新版微信JS-SDK的分享API
