@@ -1,4 +1,4 @@
-# wechat-JS-SDK-demo
+# wechat-JS-SDK-demo (更新时间: 2020-10-30)
 成功演示地址，使用 *微信* 或 *微信开发者工具* 访问
 
 https://tiepili.com/web/index.html
