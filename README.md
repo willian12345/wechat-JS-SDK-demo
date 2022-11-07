@@ -1,3 +1,9 @@
+# 经常忘掉服务端示例的下载地址，这里注释一下
+
+https://developers.weixin.qq.com/doc/offiaccount/Basic_Information/Access_Overview.html
+[签名算法各语言版本]([https://markdown.com.cn](https://res.wx.qq.com/op_res/-serEQ6xSDVIjfoOHcX78T1JAYX-pM_fghzfiNYoD8uHVd3fOeC0PC_pvlg4-kmP))
+
+
 # wechat-JS-SDK-demo (更新时间: 2020-10-30)
 成功演示地址，使用 *微信* 或 *微信开发者工具* 访问
 
