@@ -2,7 +2,7 @@
 
 https://developers.weixin.qq.com/doc/offiaccount/Basic_Information/Access_Overview.html
 
-[签名算法各语言版本]([https://markdown.com.cn](https://res.wx.qq.com/op_res/-serEQ6xSDVIjfoOHcX78T1JAYX-pM_fghzfiNYoD8uHVd3fOeC0PC_pvlg4-kmP)
+[签名算法各语言版本](https://res.wx.qq.com/op_res/-serEQ6xSDVIjfoOHcX78T1JAYX-pM_fghzfiNYoD8uHVd3fOeC0PC_pvlg4-kmP)
 
 
 # wechat-JS-SDK-demo (更新时间: 2020-10-30)
